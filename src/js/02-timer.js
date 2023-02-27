@@ -4,8 +4,10 @@ import Notiflix from 'notiflix';
 
 const buttonStartRef = document.querySelector('button[data-start]');
 
-buttonStartRef.disabled = true;
+const inputRef = document.querySelector('input');
 
+buttonStartRef.disabled = true;
+inputRef.disabled = false;
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -17,10 +19,13 @@ const options = {
       return;
     }
     buttonStartRef.disabled = false;
+
     let startTime = Date.parse(selectedDates[0]) - Date.parse(new Date());
     let referencePoint = convertMs(startTime);
     let result = timeDisplay(referencePoint);
     function startTimer() {
+      inputRef.disabled = true;
+
       const IntervalId = setInterval(() => {
         startTime -= 1000;
         if (startTime < 1000) {

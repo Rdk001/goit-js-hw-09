@@ -33,11 +33,11 @@ function start(e) {
   for (const input of refs.inputs) {
     formObj[input.name] = input.value;
   }
-
   e.preventDefault();
-  promisResult(createPromise(1, formObj.delay));
-
-  for (let i = 1; i < formObj.amount; i += 1) {
+  for (let i = 0; i < formObj.amount; i += 1) {
+    if (Number(formObj.amount) === 0) {
+      return;
+    }
     promisResult(
       createPromise(i + 1, Number(formObj.delay) + Number(formObj.step) * i)
     );
