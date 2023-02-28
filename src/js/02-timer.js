@@ -22,25 +22,18 @@ const options = {
       return;
     }
     buttonStartRef.disabled = false;
-    let startTime = Date.parse(selectedDates[0]) - Date.parse(new Date());
-    let referencePoint = convertMs(startTime);
-    let result = timeDisplay(referencePoint);
     function startTimer() {
       inputRef.disabled = true;
       const IntervalId = setInterval(() => {
+        let startTime = Date.parse(selectedDates[0]) - Date.parse(new Date());
+        let referencePoint = convertMs(startTime);
+        let result = timeDisplay(referencePoint);
         startTime -= 1000;
-        if (startTime < 1000) {
+        if (startTime < 0) {
           Notiflix.Notify.info('The time has come !');
           clearInterval(IntervalId);
         }
-        const start = Date.parse(selectedDates[0]) - Date.parse(new Date());
-        const reference = convertMs(start);
-        const timer = timeDisplay(reference);
-        return timer;
-
-        // const referencePoint = convertMs(startTime);
-        // const result = timeDisplay(referencePoint);
-        // return result;
+        return result;
       }, 1000);
     }
 
