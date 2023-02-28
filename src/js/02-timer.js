@@ -18,12 +18,10 @@ const options = {
         span.textContent = '00';
       }
       buttonStartRef.disabled = true;
-
       Notiflix.Notify.failure('Please choose a date in the future');
       return;
     }
     buttonStartRef.disabled = false;
-
     let startTime = Date.parse(selectedDates[0]) - Date.parse(new Date());
     let referencePoint = convertMs(startTime);
     let result = timeDisplay(referencePoint);
@@ -35,9 +33,14 @@ const options = {
           Notiflix.Notify.info('The time has come !');
           clearInterval(IntervalId);
         }
-        const referencePoint = convertMs(startTime);
-        const result = timeDisplay(referencePoint);
-        return result;
+        const start = Date.parse(selectedDates[0]) - Date.parse(new Date());
+        const reference = convertMs(start);
+        const timer = timeDisplay(reference);
+        return timer;
+
+        // const referencePoint = convertMs(startTime);
+        // const result = timeDisplay(referencePoint);
+        // return result;
       }, 1000);
     }
 
