@@ -3,9 +3,8 @@ import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
 const buttonStartRef = document.querySelector('button[data-start]');
-
+const spansValue = document.querySelectorAll('.value');
 const inputRef = document.querySelector('input');
-
 buttonStartRef.disabled = true;
 inputRef.disabled = false;
 const options = {
@@ -15,6 +14,11 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     if (selectedDates[0] < new Date()) {
+      for (const span of spansValue) {
+        span.textContent = '00';
+      }
+      buttonStartRef.disabled = true;
+
       Notiflix.Notify.failure('Please choose a date in the future');
       return;
     }
@@ -25,7 +29,6 @@ const options = {
     let result = timeDisplay(referencePoint);
     function startTimer() {
       inputRef.disabled = true;
-
       const IntervalId = setInterval(() => {
         startTime -= 1000;
         if (startTime < 1000) {

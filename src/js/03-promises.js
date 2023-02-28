@@ -35,9 +35,6 @@ function start(e) {
   }
   e.preventDefault();
   for (let i = 0; i < formObj.amount; i += 1) {
-    if (Number(formObj.amount) === 0) {
-      return;
-    }
     promisResult(
       createPromise(i + 1, Number(formObj.delay) + Number(formObj.step) * i)
     );
